@@ -7,17 +7,19 @@
     <link rel="stylesheet" href="tareas.css">
 </head>
 <body>
-    <div id="contenedor">
+    <div id="contenedor" class="claro">
         <h2>Lista de Tareas</h2>
 
         <div id="botones">
             <button id="agregar">Agregar Tarea</button>
             <button id="vaciar">Vaciar Lista</button>
+            <button id="modoOscuroClaro">Modo Oscuro/Claro</button>
+            <button id="exportar">Exportar</button>
+            <input type="file" id="importar" accept=".json">
         </div>
 
-        <!-- Francisco Val, Filtro -->
         <div id="filtro">
-            <label for="filtroCat">Filtrar:</label>
+            <label for="filtroCat">Filtrar por categoría:</label>
             <select id="filtroCat">
                 <option value="todos">Todos</option>
                 <option value="trabajo">Trabajo</option>
@@ -25,15 +27,29 @@
                 <option value="estudios">Estudios</option>
                 <option value="otros">Otros</option>
             </select>
+
+            <label for="filtroPrioridad">Filtrar por prioridad:</label>
+            <select id="filtroPrioridad">
+                <option value="todas">Todas</option>
+                <option value="alta">Alta</option>
+                <option value="media">Media</option>
+                <option value="baja">Baja</option>
+            </select>
+
+            <input type="text" id="busquedaTexto" placeholder="Buscar tarea...">
             <button id="filtrar">Aplicar Filtro</button>
         </div>
-        <!-- Francisco Val, Filtro -->
 
-        <!-- Francisco Val, categorias -->
         <table border="1" cellpadding="3">
             <tr>
                 <th>Tarea</th>
                 <th>Categoría</th>
+                <th>Prioridad</th>
+                <th>Fecha Límite</th>
+                <th>Color</th>
+                <th>Tiempo Estimado (min)</th>
+                <th>Notas</th>
+                <th>Subtareas</th>
             </tr>
             <tr>
                 <td><input type="text" id="inputTarea" placeholder="Escribe una tarea"></td>
@@ -45,12 +61,38 @@
                         <option value="otros">Otros</option>
                     </select>
                 </td>
+                <td>
+                    <select id="prioridad">
+                        <option value="alta">Alta</option>
+                        <option value="media">Media</option>
+                        <option value="baja">Baja</option>
+                    </select>
+                </td>
+                <td><input type="date" id="fechaLimite"></td>
+                <td><input type="color" id="colorEtiqueta" value="#ffffff"></td>
+                <td><input type="number" id="tiempoEstimado" min="1"></td>
+                <td><textarea id="nota" placeholder="Notas..."></textarea></td>
+                <td><input type="text" id="subtareas" placeholder="Subtareas separadas por coma"></td>
             </tr>
         </table>
-        <!-- Francisco Val, categorias -->
 
-        <ul id="lista"></ul>
+        <ul id="lista" class="tareas-pendientes" ondrop="drop(event)" ondragover="allowDrop(event)"></ul>
+
+        <h3>Tareas Completadas</h3>
+        <ul id="completadas"></ul>
+
+        <h3>Estadísticas</h3>
+        <div id="estadisticas">
+            <p>Total de tareas: <span id="total"></span></p>
+            <p>Completadas: <span id="totalCompletadas"></span></p>
+            <p>Pendientes: <span id="totalPendientes"></span></p>
+            <p>Trabajo: <span id="catTrabajo"></span></p>
+            <p>Personal: <span id="catPersonal"></span></p>
+            <p>Estudios: <span id="catEstudios"></span></p>
+            <p>Otros: <span id="catOtros"></span></p>
+        </div>
     </div>
+
     <script src="tareas.js"></script>
 </body>
 </html>
